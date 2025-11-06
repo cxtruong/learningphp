@@ -1,1 +1,22 @@
-{"routes":[{"route":"/profile.html","allowedRoles":["authenticated"]}],"auth":{"rolesSource":"api/getProfile/index.js","identityProviders":{"google":{"registration":{"clientIdSettingName":"GOOGLE_CLIENT_ID","clientSecretSettingName":"GOOGLE_CLIENT_SECRET_APP_SETTING_NAME"}}}}}
+{
+  "routes": [
+    { "route": "/profile.html", "allowedRoles": ["authenticated"] },
+    { "route": "/admin.html", "allowedRoles": ["admin"] }
+  ],
+  "auth": {
+    "identityProviders": {
+      "google": {
+        "registration": {
+          "clientIdSettingName": "GOOGLE_CLIENT_ID",
+          "clientSecretSettingName": "GOOGLE_CLIENT_SECRET"
+        }
+      }
+    }
+  },
+  "responseOverrides": {
+    "401": {
+      "redirect": "/",
+      "statusCode": 302
+    }
+  }
+}
