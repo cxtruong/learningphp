@@ -14,10 +14,10 @@
     <button class="btn btn-warning w-100" onclick="login()">Đăng nhập bằng Google</button>
   </div>
 
-  <script>
-    function login() {
-      window.location.href = '/.auth/login/google';
-    }
-  </script>
+<script>
+  function login() {
+    window.location.href = '/.auth/login/google?post_login_redirect_uri=/profile.html';
+  }
+</script>
 </body>
 </html>
