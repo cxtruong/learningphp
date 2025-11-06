@@ -3,101 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Trang chủ</title>
+  <title>Đăng nhập - Cổng Giáo Viên</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body { background-color: #fff8f0; color: #333; }
-    .navbar { background-color: #d32f2f; }
-    .navbar a, .navbar-brand { color: #fff !important; }
-    .btn-primary { background-color: #fbc02d; border: none; color: #000; }
-    .btn-primary:hover { background-color: #fdd835; }
-    footer { background-color: #d32f2f; color: #fff; padding: 20px 0; }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">Azure Web Demo</a>
-      <div class="ms-auto d-flex align-items-center" id="userSection">
-        <a href="/login" id="loginBtn" class="btn btn-primary">Đăng nhập</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Carousel -->
-  <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://picsum.photos/id/1015/1200/400" class="d-block w-100" alt="Ảnh 1">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Chào mừng đến với trang web Azure</h5>
-          <p>Triển khai nhanh, an toàn và dễ dàng mở rộng.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="https://picsum.photos/id/1016/1200/400" class="d-block w-100" alt="Ảnh 2">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Đăng nhập bằng Google</h5>
-          <p>Bảo mật và tiện lợi với Azure Authentication.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="https://picsum.photos/id/1020/1200/400" class="d-block w-100" alt="Ảnh 3">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Quản lý người dùng dễ dàng</h5>
-          <p>Phân quyền admin và user trực quan.</p>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
+<body class="bg-light d-flex flex-column justify-content-center align-items-center vh-100">
+  <div class="card text-center shadow-lg p-4" style="max-width: 400px;">
+    <h2 class="text-danger mb-3">Cổng Giáo Viên</h2>
+    <p class="text-secondary">Đăng nhập để truy cập thông tin của bạn</p>
+    <button class="btn btn-warning w-100" onclick="login()">Đăng nhập bằng Google</button>
   </div>
-
-  <!-- Nội dung -->
-  <div class="container my-5 text-center">
-    <h3 class="text-danger mb-3">Chào mừng bạn đến với trang web</h3>
-    <p class="mb-4">
-      Đây là ví dụ demo trang web tĩnh dùng Azure Static Web Apps, hỗ trợ đăng nhập Google, có phân quyền và giao diện tương thích cả web và mobile.
-    </p>
-    <a href="/login" id="loginBtnMain" class="btn btn-primary btn-lg">Đăng nhập bằng Google</a>
-  </div>
-
-  <footer class="text-center">
-    <p>© 2025 Azure Static Web App Demo — Thiết kế bởi Bootstrap</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    async function checkLogin() {
-      try {
-        const res = await fetch('/.auth/me');
-        const data = await res.json();
-        const user = data.clientPrincipal;
-        const loginBtn = document.getElementById('loginBtn');
-        const loginBtnMain = document.getElementById('loginBtnMain');
-        const userSection = document.getElementById('userSection');
-
-        if (user) {
-          const name = user.userDetails.split('@')[0];
-          userSection.innerHTML = `
-            <span class="me-3 text-white">Xin chào, <b>${name}</b></span>
-            <a href="/profile.html" class="btn btn-warning me-2">Hồ sơ</a>
-            <a href="/admin.html" class="btn btn-light me-2">Admin</a>
-            <a href="/logout" class="btn btn-outline-light">Đăng xuất</a>
-          `;
-          if (loginBtnMain) loginBtnMain.remove();
-        }
-      } catch {
-        console.log('Không thể xác định trạng thái đăng nhập.');
-      }
+    function login() {
+      window.location.href = '/.auth/login/google?post_login_redirect_uri=/profile.html';
     }
-    checkLogin();
   </script>
 </body>
 </html>
