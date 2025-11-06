@@ -1,8 +1,8 @@
 {
-  "routes": [
-    { "route": "/profile.html", "allowedRoles": ["authenticated"] },
-    { "route": "/admin.html", "allowedRoles": ["admin"] }
-  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/api/*", "/.auth/*"]
+  },
   "auth": {
     "identityProviders": {
       "google": {
@@ -11,12 +11,42 @@
           "clientSecretSettingName": "GOOGLE_CLIENT_SECRET"
         }
       }
+    },
+    "login": {
+      "routes": ["/profile.html", "/admin.html"],
+      "defaultProvider": "google"
     }
   },
+  "routes": [
+    {
+      "route": "/profile.html",
+      "allowedRoles": ["authenticated"]
+    },
+    {
+      "route": "/admin.html",
+      "allowedRoles": ["admin"]
+    },
+    {
+      "route": "/login",
+      "rewrite": "/.auth/login/google"
+    },
+    {
+      "route": "/logout",
+      "rewrite": "/.auth/logout?post_logout_redirect_uri=/index.html"
+    },
+    {
+      "route": "/api/*",
+      "allowedRoles": ["authenticated"]
+    }
+  ],
   "responseOverrides": {
     "401": {
-      "redirect": "/",
-      "statusCode": 302
+      "statusCode": 302,
+      "redirect": "/login"
+    },
+    "403": {
+      "statusCode": 302,
+      "redirect": "/login"
     }
   }
 }
