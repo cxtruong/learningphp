@@ -1,0 +1,10 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+}
+.card {
+  border-top: 6px solid #dc3545;
+}
+.btn-warning {
+  color: #000;
+  font-weight: 600;
+}
